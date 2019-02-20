@@ -10,7 +10,7 @@ namespace AsyncExercise
         /* Return [amount] random numbers between [min] and [max] inclusive */
         public async Task<int[]> GetNumbers(int amount, int min, int max)
         {
-            await Task.Delay(1000);
+            await Task.Delay(10000);
             int[] res = new int[amount];
             Random r = new Random();
             int count = 0;
