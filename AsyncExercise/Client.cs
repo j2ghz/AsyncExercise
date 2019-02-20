@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace AsyncExercise
 {
     public class Client
@@ -14,18 +18,19 @@ namespace AsyncExercise
         {
             while (true)
             {
-                int number = GetNumber("Enter a number (0 for stop): ");
-
+                int number = GetNumber("How many numbers (0 for stop): ");
                 if (number == 0) break;
 
-                int[] numbers = mServer.GetNumbers(number, 1, 6);
-
-                Console.WriteLine("Here are the numbers from the server: ");
-
-                foreach (int x in numbers)
+                ThreadPool.QueueUserWorkItem(async _ =>
                 {
-                    Console.WriteLine(x);
-                }
+                    var numbers = await mServer.GetNumbers(number, 1, 6);
+                    Console.WriteLine("Here are the numbers from the server: ");
+                    foreach (int x in numbers)
+                    {
+                        Console.WriteLine(x);
+                    }
+                });
+
             }
         }
 
