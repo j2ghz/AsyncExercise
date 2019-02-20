@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+
 namespace AsyncExercise
 {
     public class Server
@@ -7,6 +9,7 @@ namespace AsyncExercise
         /* Return [amount] random numbers between [min] and [max] inclusive */
         public int[] GetNumbers(int amount, int min, int max)
         {
+            Thread.Sleep(10000);
             int[] res = new int[amount];
             Random r = new Random();
             int count = 0;
