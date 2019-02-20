@@ -21,9 +21,9 @@ namespace AsyncExercise
                 int number = GetNumber("How many numbers (0 for stop): ");
                 if (number == 0) break;
 
-                ThreadPool.QueueUserWorkItem(async _ =>
+                mServer.GetNumbers(number, 1, 6).ContinueWith(async r =>
                 {
-                    var numbers = await mServer.GetNumbers(number, 1, 6);
+                    var numbers = await r;
                     Console.WriteLine("Here are the numbers from the server: ");
                     foreach (int x in numbers)
                     {
